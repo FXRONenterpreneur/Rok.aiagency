@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="ROK AI Agency — We build AI-powered digital businesses. Web development, AI automation, SEO, ads & growth solutions for modern companies worldwide."/>
+<meta name="keywords" content="AI agency, AI automation, web development, SEO, Google Ads, Meta Ads, chatbots, SaaS development, ROK AI, Ronit Das"/>
+<meta property="og:title" content="ROK AI Agency — Building the Future with AI"/>
+<meta property="og:description" content="Premium AI agency for worldwide businesses. Automation, websites, SEO, ads & growth."/>
+<meta property="og:type" content="website"/>
+<title>ROK AI Agency — Building the Future with AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #0d0018;
+  --bg2: #130022;
+  --panel: rgba(30, 8, 55, 0.72);
+  --panel2: rgba(40, 12, 70, 0.55);
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(0, 195, 255, 0.18);
+  --text: #e6e6f4;
+  --text2: #b0b0cc;
+  --muted: #6e6e8e;
+  --blue: #00c3ff;
+  --blue2: #0077ff;
+  --violet: #8b5cf6;
+  --violet2: #6d28d9;
+  --pink: #d946ef;
+  --cyan: #22d3ee;
+  --grad: linear-gradient(135deg, #00c3ff 0%, #8b5cf6 55%, #d946ef 100%);
+  --grad-v: linear-gradient(180deg, #00c3ff 0%, #8b5cf6 100%);
+  --grad-soft: linear-gradient(135deg, rgba(0,195,255,0.1), rgba(139,92,246,0.1));
+  --glow-blue: 0 0 40px rgba(0,195,255,0.35);
+  --glow-violet: 0 0 40px rgba(139,92,246,0.35);
+  --glow-pink: 0 0 40px rgba(217,70,239,0.35);
+  --r-card: 18px;
+  --r-btn: 100px;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  line-height: 1.65;
+  cursor: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── LOADER ─── */
+#loader {
+  position: fixed; inset: 0; z-index: 10000;
+  background: #0d0018;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 28px;
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+#loader.out { opacity: 0; pointer-events: none; }
+.loader-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 2.2rem; letter-spacing: -0.04em;
+  background: var(--grad);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.loader-bar-wrap {
+  width: 220px; height: 2px; background: rgba(255,255,255,0.06);
+  border-radius: 100px; overflow: hidden;
+}
+.loader-bar {
+  height: 100%; width: 0%;
+  background: var(--grad);
+  border-radius: 100px;
+  transition: width 0.08s linear;
+  box-shadow: 0 0 12px rgba(0,195,255,0.6);
+}
+.loader-text {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem; color: var(--muted); letter-spacing: 0.15em;
+}
+
+/* ─── CURSOR ─── */
+.cursor-dot, .cursor-ring {
+  position: fixed; pointer-events: none; z-index: 9999;
+  border-radius: 50%; transform: translate(-50%, -50%);
+}
+.cursor-dot {
+  width: 5px; height: 5px;
+  background: var(--blue);
+  box-shadow: 0 0 14px var(--blue), 0 0 28px rgba(0,195,255,0.5);
+  transition: width 0.2s, height 0.2s, background 0.2s;
+}
+.cursor-ring {
+  width: 32px; height: 32px;
+  border: 1.5px solid rgba(0,195,255,0.4);
+  transition: left 0.1s ease-out, top 0.1s ease-out, width 0.25s, height 0.25s, border-color 0.25s, background 0.25s;
+}
+.cursor-ring.hov {
+  width: 56px; height: 56px;
+  border-color: rgba(139,92,246,0.6);
+  background: rgba(139,92,246,0.06);
+}
+@media (max-width: 768px) {
+  .cursor-dot, .cursor-ring { display: none; }
+  body { cursor: auto; }
+}
+
+/* ─── MOUSE GLOW ─── */
+.mouse-glow {
+  position: fixed; width: 700px; height: 700px;
+  border-radius: 50%; pointer-events: none; z-index: 1;
+  background: radial-gradient(circle, rgba(0,195,255,0.09) 0%, rgba(139,92,246,0.05) 45%, transparent 70%);
+  filter: blur(50px);
+  transition: left 0.4s ease-out, top 0.4s ease-out;
+}
+
+/* ─── NEURAL CANVAS ─── */
+#neural-canvas {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.65;
+}
+
+/* ─── GRID BG ─── */
+.grid-bg {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(0,195,255,0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,195,255,0.028) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 10%, transparent 100%);
+}
+
+/* ─── NOISE TEXTURE ─── */
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: 200; pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  padding: 0 6%; height: 72px;
+  display: flex; align-items: center; justify-content: space-between;
+  backdrop-filter: blur(24px) saturate(180%);
+  background: rgba(13,0,24,0.72);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.3s;
+}
+nav.scrolled { background: rgba(13,0,24,0.96); }
+.logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 1.35rem; letter-spacing: -0.03em;
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none; color: var(--text);
+}
+.logo-mark {
+  width: 34px; height: 34px; border-radius: 9px;
+  background: var(--grad);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.88rem; color: white; font-weight: 800;
+  box-shadow: 0 0 24px rgba(0,195,255,0.6), 0 0 48px rgba(139,92,246,0.3);
+}
+.logo-text .dot { color: var(--blue); }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a {
+  color: var(--muted); text-decoration: none; font-size: 0.88rem;
+  font-weight: 500; transition: color 0.2s; letter-spacing: 0.01em;
+  position: relative;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0;
+  width: 0; height: 1px; background: var(--grad); transition: width 0.3s;
+}
+.nav-links a:hover::after { width: 100%; }
+.nav-cta {
+  padding: 9px 22px; background: var(--grad); color: white;
+  border: none; border-radius: var(--r-btn); font-weight: 600;
+  font-size: 0.85rem; cursor: none;
+  box-shadow: 0 0 28px rgba(139,92,246,0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+  font-family: 'DM Sans', sans-serif; letter-spacing: 0.01em;
+}
+.nav-cta:hover { transform: translateY(-2px); box-shadow: 0 0 50px rgba(139,92,246,0.65); }
+.hamburger {
+  display: none; background: none; border: none;
+  color: var(--text); cursor: none; flex-direction: column;
+  gap: 5px; padding: 4px;
+}
+.hamburger span {
+  display: block; width: 24px; height: 1.5px;
+  background: var(--text); transition: all 0.3s;
+  border-radius: 2px;
+}
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(4.7px, 4.7px); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(4.7px, -4.7px); }
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .nav-cta { display: none; }
+  .hamburger { display: flex; }
+  .mobile-menu {
+    position: fixed; top: 72px; left: 0; right: 0;
+    background: rgba(13,0,24,0.97); backdrop-filter: blur(24px);
+    border-bottom: 1px solid var(--border);
+    padding: 28px 6% 36px;
+    transform: translateY(-110%); transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+    z-index: 490;
+  }
+  .mobile-menu.open { transform: translateY(0); }
+  .mobile-menu li { list-style: none; border-bottom: 1px solid var(--border); }
+  .mobile-menu li a {
+    display: block; padding: 16px 0; color: var(--text);
+    text-decoration: none; font-size: 1.1rem; font-weight: 500;
+  }
+  .mobile-cta {
+    display: block; margin-top: 24px; text-align: center;
+    padding: 14px; background: var(--grad); color: white;
+    border-radius: var(--r-btn); font-weight: 600; text-decoration: none;
+    box-shadow: var(--glow-violet);
+  }
+}
+
+/* ─── SECTIONS ─── */
+section { position: relative; z-index: 2; padding: 128px 6%; }
+.container { max-width: 1360px; margin: 0 auto; }
+
+/* ─── REVEAL ─── */
+.reveal {
+  opacity: 0; transform: translateY(32px);
+  transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
+}
+.reveal.vis { opacity: 1; transform: none; }
+.reveal-l { opacity: 0; transform: translateX(-32px); transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1); }
+.reveal-l.vis { opacity: 1; transform: none; }
+.reveal-r { opacity: 0; transform: translateX(32px); transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1); }
+.reveal-r.vis { opacity: 1; transform: none; }
+.d1 { transition-delay: 0.1s; }
+.d2 { transition-delay: 0.2s; }
+.d3 { transition-delay: 0.3s; }
+.d4 { transition-delay: 0.4s; }
+.d5 { transition-delay: 0.5s; }
+
+/* ─── SECTION HEAD ─── */
+.section-head { text-align: center; margin-bottom: 72px; }
+.label-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'DM Mono', monospace; font-size: 0.78rem;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--blue); margin-bottom: 20px;
+}
+.label-tag::before, .label-tag::after {
+  content: ''; width: 28px; height: 1px; background: rgba(0,195,255,0.35);
+}
+.sh2 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: clamp(2rem, 4.5vw, 3.6rem);
+  letter-spacing: -0.04em; line-height: 1.08;
+  background: linear-gradient(180deg, #fff 30%, #7070a0 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 18px;
+}
+.sh-sub { color: var(--muted); max-width: 600px; margin: 0 auto; font-size: 1.02rem; }
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding-top: 130px; padding-bottom: 80px;
+  text-align: center; position: relative; overflow: hidden;
+}
+.hero-aura {
+  position: absolute; width: 900px; height: 900px;
+  border-radius: 50%; pointer-events: none; z-index: 0;
+  background: radial-gradient(circle, rgba(139,92,246,0.22) 0%, rgba(0,195,255,0.08) 45%, transparent 70%);
+  filter: blur(80px);
+  animation: aura-pulse 8s ease-in-out infinite;
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
+}
+@keyframes aura-pulse {
+  0%,100% { opacity:0.6; transform:translate(-50%,-50%) scale(1); }
+  50% { opacity:1; transform:translate(-50%,-50%) scale(1.18); }
+}
+.hero-content { position: relative; z-index: 2; max-width: 1060px; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 7px 18px 7px 9px; border-radius: var(--r-btn);
+  background: rgba(139,92,246,0.1); border: 1px solid rgba(139,92,246,0.28);
+  font-size: 0.82rem; color: #c4a3ff; margin-bottom: 36px;
+  backdrop-filter: blur(12px);
+  font-family: 'DM Mono', monospace; letter-spacing: 0.05em;
+}
+.badge-pill {
+  padding: 3px 10px; background: rgba(139,92,246,0.3);
+  border-radius: 100px; font-size: 0.75rem; color: #e0c8ff;
+}
+.badge-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--violet); box-shadow: 0 0 8px var(--violet);
+  animation: blink 2.5s infinite;
+}
+@keyframes blink { 50%{opacity:0.2;} }
+.hero h1 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: clamp(2.8rem, 7.5vw, 6.4rem);
+  letter-spacing: -0.045em; line-height: 1.04;
+  margin-bottom: 28px;
+  background: linear-gradient(160deg, #ffffff 20%, #aaaacc 80%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero h1 .h-grad {
+  background: var(--grad);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero-sub {
+  font-size: clamp(1rem, 1.6vw, 1.22rem);
+  color: var(--text2); max-width: 680px; margin: 0 auto 52px;
+  line-height: 1.7; font-weight: 300;
+}
+.hero-cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 80px; }
+.btn {
+  padding: 15px 30px; border-radius: var(--r-btn); font-weight: 600;
+  font-size: 0.92rem; cursor: none; border: none;
+  font-family: 'DM Sans', sans-serif; letter-spacing: 0.01em;
+  transition: all 0.25s cubic-bezier(0.22,1,0.36,1);
+  display: inline-flex; align-items: center; gap: 9px;
+  text-decoration: none; position: relative; overflow: hidden;
+}
+.btn::after {
+  content: ''; position: absolute; inset: 0; border-radius: inherit;
+  background: rgba(255,255,255,0.12); opacity: 0;
+  transition: opacity 0.2s;
+}
+.btn:hover::after { opacity: 1; }
+.btn-primary {
+  background: var(--grad); color: white;
+  box-shadow: 0 0 40px rgba(0,195,255,0.35), 0 0 80px rgba(139,92,246,0.2);
+}
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 0 60px rgba(0,195,255,0.5), 0 0 100px rgba(139,92,246,0.35); }
+.btn-ghost {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border); backdrop-filter: blur(10px);
+  color: var(--text);
+}
+.btn-ghost:hover { background: rgba(255,255,255,0.08); border-color: rgba(0,195,255,0.3); transform: translateY(-2px); }
+.btn-sm { padding: 10px 22px; font-size: 0.85rem; }
+
+/* Hologram Orb */
+.orb-wrap {
+  position: relative; width: min(460px, 82vw); height: min(460px, 82vw);
+  margin: 0 auto;
+}
+.orb {
+  position: absolute; inset: 0; border-radius: 50%;
+  background: conic-gradient(from 0deg, rgba(0,195,255,0.7), rgba(139,92,246,0.6), rgba(217,70,239,0.5), rgba(0,195,255,0.7));
+  filter: blur(3px);
+  animation: spin 22s linear infinite;
+  mask-image: radial-gradient(circle at center, transparent 40%, black 65%, transparent 100%);
+}
+.orb-core {
+  position: absolute; top: 50%; left: 50%;
+  width: 52%; height: 52%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, rgba(0,195,255,0.9), rgba(139,92,246,0.7) 50%, rgba(217,70,239,0.4));
+  filter: blur(18px);
+  animation: core-pulse 4s ease-in-out infinite;
+  box-shadow: 0 0 80px rgba(0,195,255,0.4), 0 0 140px rgba(139,92,246,0.25);
+}
+@keyframes core-pulse {
+  0%,100% { transform:translate(-50%,-50%) scale(1); opacity:0.8; }
+  50% { transform:translate(-50%,-50%) scale(1.15); opacity:1; }
+}
+.orb-ring {
+  position: absolute; border-radius: 50%; border: 1px solid;
+  animation: spin linear infinite;
+}
+.orb-ring:nth-child(3) { inset: 14%; border-color: rgba(0,195,255,0.25); animation-duration: 18s; }
+.orb-ring:nth-child(4) { inset: 28%; border-color: rgba(139,92,246,0.3); animation-duration: 12s; animation-direction: reverse; }
+.orb-ring:nth-child(5) { inset: 40%; border-color: rgba(217,70,239,0.25); animation-duration: 8s; }
+.orb-dot {
+  position: absolute; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--blue); box-shadow: 0 0 12px var(--blue);
+  top: 50%; left: 0; transform-origin: 50% center;
+  animation: spin 18s linear infinite;
+}
+.orb-dot-2 {
+  position: absolute; width: 5px; height: 5px; border-radius: 50%;
+  background: var(--violet); box-shadow: 0 0 10px var(--violet);
+  top: 0; left: 50%; transform-origin: center 50%;
+  animation: spin 12s linear infinite reverse;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.orb-label {
+  position: absolute; bottom: -16px; left: 50%; transform: translateX(-50%);
+  font-family: 'DM Mono', monospace; font-size: 0.7rem;
+  color: var(--muted); letter-spacing: 0.2em; text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Floating data chips */
+.orb-chip {
+  position: absolute; padding: 8px 14px; border-radius: 10px;
+  background: var(--panel); border: 1px solid var(--border2);
+  backdrop-filter: blur(16px); white-space: nowrap;
+  font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--cyan);
+  animation: chip-float 4s ease-in-out infinite;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+.orb-chip:nth-child(7) { top: 12%; left: -14%; animation-delay: 0s; }
+.orb-chip:nth-child(8) { top: 50%; right: -18%; animation-delay: 1.3s; }
+.orb-chip:nth-child(9) { bottom: 8%; left: 4%; animation-delay: 2.6s; }
+@keyframes chip-float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Stats strip */
+.stats-strip {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 20px; margin-top: 100px;
+}
+@media (max-width: 768px) { .stats-strip { grid-template-columns: repeat(2,1fr); } }
+.stat-card {
+  padding: 28px 24px; background: var(--panel); border: 1px solid var(--border);
+  border-radius: var(--r-card); backdrop-filter: blur(20px);
+  text-align: center; transition: all 0.3s;
+  position: relative; overflow: hidden;
+}
+.stat-card::before {
+  content: ''; position: absolute; inset: 0;
+  background: var(--grad-soft); opacity: 0; transition: opacity 0.3s;
+}
+.stat-card:hover { border-color: var(--border2); transform: translateY(-4px); }
+.stat-card:hover::before { opacity: 1; }
+.stat-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 2.6rem; font-weight: 800; line-height: 1;
+  background: var(--grad);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.stat-label { font-size: 0.85rem; color: var(--muted); margin-top: 6px; }
+
+/* ─── ABOUT ─── */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+@media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; gap: 40px; } }
+.about-h { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 3.5vw, 2.8rem); letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 22px; }
+.about-p { color: var(--text2); margin-bottom: 18px; font-size: 1.02rem; line-height: 1.75; }
+.timeline { display: flex; flex-direction: column; gap: 20px; margin-top: 32px; }
+.tl-item { display: flex; gap: 16px; align-items: flex-start; }
+.tl-dot {
+  width: 36px; height: 36px; border-radius: 50%; background: var(--grad);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.9rem; flex-shrink: 0; box-shadow: var(--glow-blue);
+}
+.tl-body h4 { font-weight: 600; margin-bottom: 4px; font-size: 0.95rem; }
+.tl-body p { font-size: 0.88rem; color: var(--muted); }
+.founder-panel {
+  padding: 44px; background: var(--panel); border: 1px solid var(--border);
+  border-radius: 24px; backdrop-filter: blur(24px); position: relative; overflow: hidden;
+}
+.founder-panel::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(0,195,255,0.07), rgba(139,92,246,0.07));
+}
+.founder-panel::after {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: var(--grad);
+}
+.f-avatar {
+  width: 86px; height: 86px; border-radius: 50%; background: var(--grad);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-size: 1.6rem; font-weight: 800; color: white;
+  box-shadow: 0 0 48px rgba(139,92,246,0.5); margin-bottom: 22px;
+  position: relative; z-index: 1;
+}
+.f-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.5rem; margin-bottom: 4px; }
+.f-role { color: var(--blue); font-family: 'DM Mono', monospace; font-size: 0.82rem; letter-spacing: 0.08em; margin-bottom: 20px; }
+.f-quote { color: var(--text2); font-size: 0.97rem; line-height: 1.75; position: relative; z-index: 1; font-style: italic; }
+
+/* ─── SERVICES ─── */
+.services-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(272px, 1fr));
+  gap: 18px;
+}
+.svc-card {
+  padding: 30px; background: var(--panel); border: 1px solid var(--border);
+  border-radius: var(--r-card); backdrop-filter: blur(18px);
+  transition: all 0.35s cubic-bezier(0.22,1,0.36,1);
+  position: relative; overflow: hidden; cursor: none;
+}
+.svc-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: var(--grad); opacity: 0; transition: opacity 0.3s;
+}
+.svc-card:hover { transform: translateY(-6px); border-color: rgba(139,92,246,0.3); box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 30px rgba(139,92,246,0.1); }
+.svc-card:hover::before { opacity: 1; }
+.svc-icon {
+  width: 50px; height: 50px; border-radius: 12px;
+  background: var(--grad-soft); border: 1px solid rgba(0,195,255,0.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.35rem; margin-bottom: 18px;
+  transition: box-shadow 0.3s;
+}
+.svc-card:hover .svc-icon { box-shadow: 0 0 24px rgba(0,195,255,0.3); }
+.svc-card h3 { font-family: 'Syne', sans-serif; font-size: 1.08rem; font-weight: 700; margin-bottom: 9px; }
+.svc-card p { color: var(--muted); font-size: 0.88rem; margin-bottom: 18px; line-height: 1.65; }
+.svc-link {
+  color: var(--blue); font-size: 0.85rem; font-weight: 600;
+  text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+  transition: gap 0.2s; font-family: 'DM Mono', monospace; letter-spacing: 0.05em;
+}
+.svc-link:hover { gap: 12px; }
+
+/* ─── PRICING ─── */
+.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px; }
+.price-card {
+  padding: 44px 38px; background: var(--panel); border: 1px solid var(--border);
+  border-radius: 24px; backdrop-filter: blur(24px); position: relative; overflow: hidden;
+  transition: all 0.3s;
+}
+.price-card:hover { transform: translateY(-4px); }
+.price-card.featured {
+  border-color: rgba(139,92,246,0.5);
+  background: linear-gradient(160deg, rgba(139,92,246,0.09), rgba(8,8,22,0.72));
+  box-shadow: 0 0 80px rgba(139,92,246,0.15);
+}
+.price-card.featured::after {
+  content: 'MOST POPULAR'; position: absolute; top: 20px; right: 20px;
+  padding: 4px 12px; background: var(--grad); border-radius: 100px;
+  font-family: 'DM Mono', monospace; font-size: 0.66rem; color: white;
+  letter-spacing: 0.12em;
+}
+.price-card.featured::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: var(--grad);
+}
+.price-card h3 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.3rem; margin-bottom: 8px; }
+.price-desc { color: var(--muted); font-size: 0.88rem; margin-bottom: 24px; }
+.price-amount {
+  font-family: 'Syne', sans-serif; font-weight: 800; font-size: 3rem;
+  letter-spacing: -0.04em; line-height: 1; margin-bottom: 8px;
+  background: var(--grad);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.price-amount span { font-size: 1.2rem; font-weight: 500; opacity: 0.8; }
+.price-period { font-family: 'DM Mono', monospace; font-size: 0.78rem; color: var(--muted); margin-bottom: 28px; letter-spacing: 0.08em; }
+.price-features { list-style: none; margin-bottom: 32px; display: flex; flex-direction: column; gap: 11px; }
+.price-features li {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 0.9rem; color: var(--text2);
+}
+.price-features li::before {
+  content: ''; width: 16px; height: 16px; border-radius: 50%;
+  background: var(--grad); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8l3.5 3.5L13 5' stroke='white' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-size: 100%;
+}
+
+/* ─── PORTFOLIO ─── */
+.portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+@media (max-width: 900px) { .portfolio-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .portfolio-grid { grid-template-columns: 1fr; } }
+.proj-card {
+  border-radius: var(--r-card); overflow: hidden; position: relative;
+  aspect-ratio: 4/3; cursor: none; group: true;
+  transition: all 0.4s cubic-bezier(0.22,1,0.36,1);
+}
+.proj-card:hover { transform: scale(1.03); box-shadow: 0 24px 60px rgba(0,0,0,0.6); }
+.proj-visual {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  font-size: 3rem; transition: transform 0.4s;
+}
+.proj-card:hover .proj-visual { transform: scale(1.08); }
+.pv1 { background: linear-gradient(135deg, #0f0f3a, #1a0a4a, #0d1a3a); }
+.pv2 { background: linear-gradient(135deg, #0a1a2a, #0d2a1a, #162616); }
+.pv3 { background: linear-gradient(135deg, #2a0a1a, #3a0a2a, #1a0a1a); }
+.pv4 { background: linear-gradient(135deg, #0f1a0f, #1a2a0a, #0a1a14); }
+.pv5 { background: linear-gradient(135deg, #2a1a00, #1a0a20, #00101a); }
+.pv6 { background: linear-gradient(135deg, #1a0a3a, #0a1a2a, #2a0a0a); }
+.proj-overlay {
+  position: absolute; inset: 0; background: linear-gradient(to top, rgba(3,3,10,0.95) 0%, transparent 50%);
+  display: flex; flex-direction: column; justify-content: flex-end; padding: 20px;
+}
+.proj-tag {
+  font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--blue);
+  letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 6px;
+}
+.proj-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.05rem; }
+.proj-border {
+  position: absolute; inset: 0; border-radius: var(--r-card);
+  border: 1px solid transparent;
+  transition: border-color 0.3s;
+  pointer-events: none;
+}
+.proj-card:hover .proj-border { border-color: rgba(0,195,255,0.3); }
+
+/* ─── TESTIMONIALS ─── */
+.testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+@media (max-width: 900px) { .testi-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .testi-grid { grid-template-columns: 1fr; } }
+.testi-card {
+  padding: 32px; background: var(--panel); border: 1px solid var(--border);
+  border-radius: var(--r-card); backdrop-filter: blur(18px);
+  transition: border-color 0.3s, transform 0.3s;
+}
+.testi-card:hover { border-color: rgba(139,92,246,0.3); transform: translateY(-4px); }
+.stars { color: #f59e0b; font-size: 0.88rem; letter-spacing: 2px; margin-bottom: 16px; }
+.testi-card p { color: var(--text2); font-size: 0.93rem; line-height: 1.75; margin-bottom: 22px; font-style: italic; }
+.testi-author { display: flex; align-items: center; gap: 12px; }
+.t-avatar {
+  width: 40px; height: 40px; border-radius: 50%; background: var(--grad);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 0.78rem; color: white; flex-shrink: 0;
+}
+.t-name { font-weight: 600; font-size: 0.9rem; }
+.t-co { font-size: 0.8rem; color: var(--muted); }
+
+/* ─── CONTACT ─── */
+.booking-wrap { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: start; }
+@media (max-width: 900px) { .booking-wrap { grid-template-columns: 1fr; } }
+.booking-h { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 3vw, 2.6rem); letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 18px; }
+.booking-sub { color: var(--text2); margin-bottom: 36px; font-size: 1rem; line-height: 1.75; }
+.contact-links { display: flex; flex-direction: column; gap: 14px; }
+.c-link {
+  display: flex; align-items: center; gap: 16px;
+  padding: 16px 20px; background: var(--panel); border: 1px solid var(--border);
+  border-radius: 12px; backdrop-filter: blur(12px); text-decoration: none;
+  color: var(--text); transition: border-color 0.2s, transform 0.2s;
+}
+.c-link:hover { border-color: var(--border2); transform: translateX(4px); }
+.c-ico {
+  width: 38px; height: 38px; border-radius: 10px; background: var(--grad-soft);
+  border: 1px solid var(--border2);
+  display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0;
+}
+.c-label { font-size: 0.78rem; color: var(--muted); margin-bottom: 2px; font-family: 'DM Mono', monospace; }
+.c-val { font-size: 0.92rem; font-weight: 500; }
+
+/* FORM */
+.form-panel {
+  padding: 44px; background: var(--panel); border: 1px solid var(--border);
+  border-radius: 24px; backdrop-filter: blur(24px); position: relative; overflow: hidden;
+}
+.form-panel::before {
+  content: ''; position: absolute; inset: 0;
+  background: var(--grad-soft); pointer-events: none;
+}
+.form-panel::after {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: var(--grad);
+}
+.form-row { margin-bottom: 20px; position: relative; z-index: 1; }
+.form-row label { display: block; font-size: 0.82rem; color: var(--muted); margin-bottom: 8px; font-family: 'DM Mono', monospace; letter-spacing: 0.05em; }
+.form-row input, .form-row select, .form-row textarea {
+  width: 100%; padding: 13px 16px;
+  background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+  border-radius: 10px; color: var(--text); font-family: 'DM Sans', sans-serif;
+  font-size: 0.92rem; transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none; -webkit-appearance: none;
+}
+.form-row input:focus, .form-row select:focus, .form-row textarea:focus {
+  border-color: rgba(0,195,255,0.4);
+  box-shadow: 0 0 0 3px rgba(0,195,255,0.08);
+}
+.form-row select { cursor: none; background: rgba(255,255,255,0.04); }
+.form-row select option { background: #0a0a1a; }
+.form-row textarea { min-height: 110px; resize: vertical; }
+.form-row input::placeholder, .form-row textarea::placeholder { color: var(--muted); }
+
+/* ─── AI FEATURES SECTION ─── */
+.ai-features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+@media (max-width: 700px) { .ai-features-grid { grid-template-columns: 1fr; } }
+.ai-feat-card {
+  padding: 36px; background: var(--panel); border: 1px solid var(--border);
+  border-radius: var(--r-card); backdrop-filter: blur(18px);
+  display: flex; gap: 20px; align-items: flex-start;
+  transition: all 0.3s; position: relative; overflow: hidden;
+}
+.ai-feat-card:hover { border-color: var(--border2); transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0,195,255,0.08); }
+.ai-feat-ico {
+  width: 52px; height: 52px; border-radius: 14px; flex-shrink: 0;
+  background: var(--grad); display: flex; align-items: center;
+  justify-content: center; font-size: 1.4rem;
+  box-shadow: var(--glow-blue);
+}
+.ai-feat-body h3 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.05rem; margin-bottom: 8px; }
+.ai-feat-body p { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
+
+/* ─── TICKER ─── */
+.ticker-wrap {
+  overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  padding: 16px 0; background: rgba(8,8,22,0.5); position: relative; z-index: 3;
+}
+.ticker-track {
+  display: flex; gap: 60px; width: max-content;
+  animation: ticker 30s linear infinite;
+}
+.ticker-track:hover { animation-play-state: paused; }
+@keyframes ticker { to { transform: translateX(-50%); } }
+.ticker-item {
+  display: flex; align-items: center; gap: 12px;
+  font-family: 'DM Mono', monospace; font-size: 0.78rem;
+  color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap;
+}
+.ticker-item .t-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 8px var(--blue); }
+
+/* ─── CTA BAND ─── */
+.cta-band {
+  margin: 0 6%; border-radius: 24px; padding: 72px 64px;
+  background: linear-gradient(135deg, rgba(0,195,255,0.1) 0%, rgba(139,92,246,0.15) 50%, rgba(217,70,239,0.1) 100%);
+  border: 1px solid rgba(139,92,246,0.25);
+  text-align: center; position: relative; overflow: hidden; z-index: 2;
+}
+.cta-band::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(139,92,246,0.2), transparent 60%);
+}
+.cta-band h2 {
+  font-family: 'Syne', sans-serif; font-weight: 800;
+  font-size: clamp(1.8rem, 3.5vw, 3rem); letter-spacing: -0.04em;
+  margin-bottom: 16px; position: relative; z-index: 1;
+}
+.cta-band p { color: var(--text2); margin-bottom: 36px; max-width: 540px; margin-left: auto; margin-right: auto; position: relative; z-index: 1; }
+.cta-band-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
+
+/* ─── FOOTER ─── */
+footer {
+  position: relative; z-index: 2; padding: 72px 6% 36px;
+  border-top: 1px solid var(--border);
+  background: rgba(13,0,24,0.85);
+}
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 56px; }
+@media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; } }
+@media (max-width: 600px) { .footer-grid { grid-template-columns: 1fr; } }
+.footer-brand p { color: var(--muted); font-size: 0.9rem; margin-top: 16px; line-height: 1.7; max-width: 280px; }
+.footer-socials { display: flex; gap: 10px; margin-top: 24px; }
+.f-social {
+  width: 38px; height: 38px; border-radius: 10px;
+  background: var(--panel); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; text-decoration: none; color: var(--muted);
+  transition: all 0.2s;
+}
+.f-social:hover { border-color: var(--border2); color: var(--blue); transform: translateY(-2px); }
+.footer-col h4 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem; margin-bottom: 20px; }
+.footer-col a {
+  display: block; color: var(--muted); text-decoration: none; font-size: 0.88rem;
+  padding: 5px 0; transition: color 0.2s;
+}
+.footer-col a:hover { color: var(--blue); }
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 12px;
+  padding-top: 28px; border-top: 1px solid var(--border);
+  font-size: 0.82rem; color: var(--muted);
+  font-family: 'DM Mono', monospace;
+}
+.footer-bottom .grad-text {
+  background: var(--grad);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ─── CHAT FAB ─── */
+.chat-fab {
+  position: fixed; bottom: 28px; right: 28px; z-index: 600;
+  width: 58px; height: 58px; border-radius: 18px;
+  background: var(--grad); border: none; cursor: none;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem; box-shadow: 0 8px 32px rgba(139,92,246,0.5), 0 0 60px rgba(0,195,255,0.2);
+  transition: transform 0.25s, box-shadow 0.25s;
+  animation: fab-float 3s ease-in-out infinite;
+}
+.chat-fab:hover { transform: scale(1.08) translateY(-2px); box-shadow: 0 12px 40px rgba(139,92,246,0.7); }
+@keyframes fab-float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-5px);} }
+.chat-panel {
+  position: fixed; bottom: 100px; right: 28px; z-index: 600;
+  width: 320px; background: var(--panel); border: 1px solid var(--border2);
+  border-radius: 20px; backdrop-filter: blur(24px);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+  overflow: hidden; transform: scale(0.9) translateY(20px);
+  opacity: 0; pointer-events: none;
+  transition: all 0.35s cubic-bezier(0.22,1,0.36,1);
+  transform-origin: bottom right;
+}
+.chat-panel.open { transform: scale(1) translateY(0); opacity: 1; pointer-events: auto; }
+.chat-header {
+  padding: 16px 20px; background: var(--grad);
+  display: flex; align-items: center; gap: 10px;
+}
+.chat-header .ch-dot { width: 8px; height: 8px; border-radius: 50%; background: #4ade80; animation: blink 1.5s infinite; }
+.chat-header h4 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem; color: white; }
+.chat-header p { font-size: 0.75rem; color: rgba(255,255,255,0.75); }
+.chat-body { padding: 20px; max-height: 260px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+.chat-msg { padding: 11px 14px; border-radius: 12px; font-size: 0.85rem; max-width: 90%; line-height: 1.6; }
+.chat-msg.bot { background: rgba(255,255,255,0.06); border: 1px solid var(--border); color: var(--text2); align-self: flex-start; border-bottom-left-radius: 4px; }
+.chat-msg.usr { background: var(--grad); color: white; align-self: flex-end; border-bottom-right-radius: 4px; }
+.chat-input-row { padding: 12px 16px; border-top: 1px solid var(--border); display: flex; gap: 10px; }
+.chat-input-row input {
+  flex: 1; background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+  border-radius: 8px; padding: 9px 12px; color: var(--text);
+  font-family: 'DM Sans', sans-serif; font-size: 0.85rem; outline: none;
+  transition: border-color 0.2s;
+}
+.chat-input-row input:focus { border-color: var(--border2); }
+.chat-send {
+  padding: 9px 16px; background: var(--grad); border: none; border-radius: 8px;
+  color: white; font-size: 0.85rem; cursor: none; font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+}
+
+/* ─── MOBILE SAFE ─── */
+@media (max-width: 768px) {
+  section { padding: 80px 5%; }
+  .hero { padding-top: 110px; }
+  .cta-band { margin: 0 4%; padding: 48px 28px; }
+  .footer-socials { flex-wrap: wrap; }
+}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0d0018; }
+::-webkit-scrollbar-thumb { background: rgba(139,92,246,0.35); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,195,255,0.45); }
+
+/* grad text util */
+.grad-text {
+  background: var(--grad);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-logo">ROK<span style="opacity:0.4">.</span>AI</div>
+  <div class="loader-bar-wrap"><div class="loader-bar" id="lbar"></div></div>
+  <div class="loader-text" id="ltxt">INITIALIZING SYSTEMS</div>
+</div>
+
+<!-- CURSOR -->
+<div class="cursor-dot" id="cdot"></div>
+<div class="cursor-ring" id="cring"></div>
+<div class="mouse-glow" id="mglow"></div>
+
+<!-- CANVAS -->
+<canvas id="neural-canvas"></canvas>
+<div class="grid-bg"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="logo">
+    <div class="logo-mark">R</div>
+    <span class="logo-text">ROK<span class="dot">.</span>AI</span>
+  </a>
+  <ul class="nav-links" id="navlinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#portfolio">Work</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book a Call</button>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <ul>
+    <li><a href="#about" class="mob-nav">About</a></li>
+    <li><a href="#services" class="mob-nav">Services</a></li>
+    <li><a href="#pricing" class="mob-nav">Pricing</a></li>
+    <li><a href="#portfolio" class="mob-nav">Work</a></li>
+    <li><a href="#contact" class="mob-nav">Contact</a></li>
+  </ul>
+  <a href="#contact" class="mobile-cta mob-nav">Book Free Consultation →</a>
+</div>
+
+<!-- TICKER -->
+<div class="ticker-wrap" style="position:relative;z-index:3;margin-top:72px;">
+  <div class="ticker-track" id="ticker-track"></div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-aura"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <div class="badge-dot"></div>
+      <span class="badge-pill">NEW</span>
+      Enterprise AI Systems Now Available
+    </div>
+    <h1>We Build<br/><span class="h-grad">AI-Powered</span><br/>Digital Businesses</h1>
+    <p class="hero-sub">Web Development · AI Automation · SEO · Ads & Growth Solutions<br/>for ambitious companies worldwide — from $299/month</p>
+    <div class="hero-cta">
+      <button class="btn btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+        <span>⚡</span> Book Free Consultation
+      </button>
+      <button class="btn btn-ghost" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">
+        Explore Services →
+      </button>
+    </div>
+    <div class="orb-wrap">
+      <div class="orb"></div>
+      <div class="orb-core"></div>
+      <div class="orb-ring"></div>
+      <div class="orb-ring"></div>
+      <div class="orb-ring"></div>
+      <div class="orb-dot"></div>
+      <div class="orb-dot-2"></div>
+      <div class="orb-chip">⬡ AI CORE ONLINE</div>
+      <div class="orb-chip">◈ 14 WORKFLOWS ACTIVE</div>
+      <div class="orb-chip">↗ +412% GROWTH</div>
+      <div class="orb-label">ROK AI INTELLIGENCE ENGINE v3.0</div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="stats-strip">
+      <div class="stat-card reveal">
+        <div class="stat-num" data-count="150">0+</div>
+        <div class="stat-label">Projects Delivered</div>
+      </div>
+      <div class="stat-card reveal d1">
+        <div class="stat-num" data-count="35">0+</div>
+        <div class="stat-label">Countries Served</div>
+      </div>
+      <div class="stat-card reveal d2">
+        <div class="stat-num" data-count="98">0%</div>
+        <div class="stat-label">Client Satisfaction</div>
+      </div>
+      <div class="stat-card reveal d3">
+        <div class="stat-num" data-count="4">0x</div>
+        <div class="stat-label">Avg Revenue Growth</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <span class="label-tag reveal">About ROK AI</span>
+        <h2 class="about-h reveal d1">We don't build websites.<br/>We build <span class="grad-text">digital empires.</span></h2>
+        <p class="about-p reveal d2">ROK AI Agency is a premium AI-powered digital studio operating globally. We combine bleeding-edge automation, performance-driven web development, and data-backed growth strategies to transform businesses.</p>
+        <p class="about-p reveal d3">From Silicon Valley startups to enterprise teams across 35+ countries, we deliver production-ready AI infrastructure — engineered to scale, built to win.</p>
+        <div class="timeline reveal d4">
+          <div class="tl-item">
+            <div class="tl-dot">🤖</div>
+            <div class="tl-body">
+              <h4>AI-First Approach</h4>
+              <p>Every solution is automated, intelligent, and built to run 24/7 without manual input.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot">🌐</div>
+            <div class="tl-body">
+              <h4>Worldwide Reach</h4>
+              <p>Clients across USA, UK, Singapore, Japan, UAE, Canada, and 30+ more countries.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot">⚡</div>
+            <div class="tl-body">
+              <h4>Ship at Startup Speed</h4>
+              <p>We move fast. Most projects go live in 2–4 weeks with zero compromise on quality.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="founder-panel reveal-r">
+        <div class="f-avatar">RD</div>
+        <div class="f-name">Ronit Das</div>
+        <div class="f-role">// Founder & CEO, ROK AI Agency</div>
+        <p class="f-quote">"We don't just build websites or chatbots. We build digital businesses powered end-to-end by AI — from the first touchpoint to recurring revenue. Our mission is to give every company, regardless of size, access to enterprise-level AI infrastructure."</p>
+        <div style="margin-top:28px;display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:1;">
+          <a href="https://instagram.com/rok_ai_agency" target="_blank" class="btn btn-ghost btn-sm">◎ Instagram</a>
+          <a href="mailto:ronitdas062010@gmail.com" class="btn btn-ghost btn-sm">✉ Email</a>
+          <a href="https://wa.me/919934769043" target="_blank" class="btn btn-primary btn-sm">💬 WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="section-head">
+      <span class="label-tag reveal">Services</span>
+      <h2 class="sh2 reveal d1">Premium solutions for<br/>modern businesses</h2>
+      <p class="sh-sub reveal d2">Full-stack AI services designed to automate operations, scale revenue, and elevate your brand globally.</p>
+    </div>
+    <div class="services-grid" id="servicesGrid"></div>
+  </div>
+</section>
+
+<!-- AI FEATURES -->
+<section>
+  <div class="container">
+    <div class="section-head">
+      <span class="label-tag reveal">AI Capabilities</span>
+      <h2 class="sh2 reveal d1">Intelligent tools built<br/>into everything we ship</h2>
+      <p class="sh-sub reveal d2">Every project comes with AI-native features that work for you around the clock.</p>
+    </div>
+    <div class="ai-features-grid">
+      <div class="ai-feat-card reveal">
+        <div class="ai-feat-ico">🧠</div>
+        <div class="ai-feat-body">
+          <h3>AI Chatbot Assistant</h3>
+          <p>Custom-trained conversational agents that handle leads, support, and sales conversations automatically — 24/7, in any language.</p>
+        </div>
+      </div>
+      <div class="ai-feat-card reveal d1">
+        <div class="ai-feat-ico">📊</div>
+        <div class="ai-feat-body">
+          <h3>AI Marketing Analyzer</h3>
+          <p>Real-time campaign intelligence that optimizes your Google and Meta ad spend with predictive audience targeting and ROAS modeling.</p>
+        </div>
+      </div>
+      <div class="ai-feat-card reveal d2">
+        <div class="ai-feat-ico">🔍</div>
+        <div class="ai-feat-body">
+          <h3>AI Website Audit Tool</h3>
+          <p>Automated technical SEO, performance, and conversion rate analysis that generates a prioritized action plan in minutes.</p>
+        </div>
+      </div>
+      <div class="ai-feat-card reveal d3">
+        <div class="ai-feat-ico">⚡</div>
+        <div class="ai-feat-body">
+          <h3>AI Automation Recommender</h3>
+          <p>Analyzes your business workflows and identifies the highest-ROI automation opportunities — then implements them for you.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="container">
+    <div class="section-head">
+      <span class="label-tag reveal">AI Automation Plans</span>
+      <h2 class="sh2 reveal d1">Scale with intelligent<br/>infrastructure</h2>
+      <p class="sh-sub reveal d2">Monthly subscriptions that bring enterprise AI automation, CRM integration, and analytics to any business size.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card reveal">
+        <h3>Starter AI</h3>
+        <p class="price-desc">Perfect for solo founders and small teams.</p>
+        <div class="price-amount">$299<span>/mo</span></div>
+        <div class="price-period">MONTHLY SUBSCRIPTION · CANCEL ANYTIME</div>
+        <ul class="price-features">
+          <li>1 AI Chatbot deployment</li>
+          <li>3 Automation workflows</li>
+          <li>CRM integration (1 platform)</li>
+          <li>Email sequence automation</li>
+          <li>Basic analytics dashboard</li>
+          <li>Email support (24h response)</li>
+        </ul>
+        <a href="#contact" class="btn btn-ghost" style="width:100%;justify-content:center;">Get Started</a>
+      </div>
+      <div class="price-card featured reveal d1">
+        <h3>Professional AI</h3>
+        <p class="price-desc">For growing businesses ready to scale.</p>
+        <div class="price-amount">$899<span>/mo</span></div>
+        <div class="price-period">MONTHLY SUBSCRIPTION · CANCEL ANYTIME</div>
+        <ul class="price-features">
+          <li>Multi-channel AI chatbot</li>
+          <li>10 Automation workflows</li>
+          <li>CRM + Sales pipeline automation</li>
+          <li>AI lead generation system</li>
+          <li>Advanced analytics + reporting</li>
+          <li>Custom AI agent fine-tuning</li>
+          <li>Priority support (4h response)</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary" style="width:100%;justify-content:center;">Buy Now →</a>
+      </div>
+      <div class="price-card reveal d2">
+        <h3>Enterprise AI</h3>
+        <p class="price-desc">Custom infrastructure for large-scale operations.</p>
+        <div class="price-amount">Custom</div>
+        <div class="price-period">TAILORED CONTRACT · SLA INCLUDED</div>
+        <ul class="price-features">
+          <li>Unlimited automation workflows</li>
+          <li>Custom AI model fine-tuning</li>
+          <li>Multi-CRM + ERP integration</li>
+          <li>Dedicated AI engineer</li>
+          <li>Real-time analytics platform</li>
+          <li>SLA + 24/7 dedicated support</li>
+          <li>White-label options available</li>
+        </ul>
+        <a href="#contact" class="btn btn-ghost" style="width:100%;justify-content:center;">Contact Sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="container">
+    <div class="section-head">
+      <span class="label-tag reveal">Selected Work</span>
+      <h2 class="sh2 reveal d1">Built to perform.<br/>Designed to impress.</h2>
+      <p class="sh-sub reveal d2">Recent client launches across SaaS, e-commerce, AI infrastructure, and performance marketing.</p>
+    </div>
+    <div class="portfolio-grid">
+      <div class="proj-card reveal"><div class="proj-visual pv1">🚀</div><div class="proj-overlay"><div class="proj-tag">SaaS Platform</div><div class="proj-title">Nexus AI Dashboard</div></div><div class="proj-border"></div></div>
+      <div class="proj-card reveal d1"><div class="proj-visual pv2">📊</div><div class="proj-overlay"><div class="proj-tag">Analytics</div><div class="proj-title">Quantum Insights Engine</div></div><div class="proj-border"></div></div>
+      <div class="proj-card reveal d2"><div class="proj-visual pv3">🛒</div><div class="proj-overlay"><div class="proj-tag">E-Commerce</div><div class="proj-title">Lumen Store Rebuild</div></div><div class="proj-border"></div></div>
+      <div class="proj-card reveal d1"><div class="proj-visual pv4">🤖</div><div class="proj-overlay"><div class="proj-tag">AI Automation</div><div class="proj-title">VeloCRM Sales Agent</div></div><div class="proj-border"></div></div>
+      <div class="proj-card reveal d2"><div class="proj-visual pv5">📈</div><div class="proj-overlay"><div class="proj-tag">SEO Case Study</div><div class="proj-title">+412% Organic Growth</div></div><div class="proj-border"></div></div>
+      <div class="proj-card reveal d3"><div class="proj-visual pv6">💎</div><div class="proj-overlay"><div class="proj-tag">Brand Identity</div><div class="proj-title">Aether Studio Identity</div></div><div class="proj-border"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section>
+  <div class="container">
+    <div class="section-head">
+      <span class="label-tag reveal">Client Testimonials</span>
+      <h2 class="sh2 reveal d1">Trusted by founders<br/>across 35+ countries</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="stars">★★★★★</div>
+        <p>"ROK rebuilt our entire customer pipeline with AI agents. We're closing 3× more deals with the same team. Genuinely game-changing work."</p>
+        <div class="testi-author"><div class="t-avatar">SM</div><div><div class="t-name">Sarah Mitchell</div><div class="t-co">CEO · Lumen Commerce, USA</div></div></div>
+      </div>
+      <div class="testi-card reveal d1">
+        <div class="stars">★★★★★</div>
+        <p>"The level of polish on our SaaS dashboard is unreal. Investors literally commented on the UI in our last raise. Worth every dollar."</p>
+        <div class="testi-author"><div class="t-avatar">AK</div><div><div class="t-name">Arjun Kapoor</div><div class="t-co">Founder · Nexus AI, Singapore</div></div></div>
+      </div>
+      <div class="testi-card reveal d2">
+        <div class="stars">★★★★★</div>
+        <p>"Hired ROK for SEO and within 4 months our organic traffic 4×'d. Ronit's team is technical, fast, and genuinely strategic."</p>
+        <div class="testi-author"><div class="t-avatar">EV</div><div><div class="t-name">Elena Vasquez</div><div class="t-co">CMO · Aether Studio, Spain</div></div></div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="stars">★★★★★</div>
+        <p>"Best AI agency we've worked with. Period. They ship faster than anyone and the quality is on par with top US studios."</p>
+        <div class="testi-author"><div class="t-avatar">JW</div><div><div class="t-name">James Whitfield</div><div class="t-co">Founder · VeloCRM, UK</div></div></div>
+      </div>
+      <div class="testi-card reveal d1">
+        <div class="stars">★★★★★</div>
+        <p>"Our chatbot handles 70% of support tickets autonomously. Customer NPS went up. Cost went down. ROK delivered exactly what they promised."</p>
+        <div class="testi-author"><div class="t-avatar">YT</div><div><div class="t-name">Yuki Tanaka</div><div class="t-co">COO · Sora Logistics, Japan</div></div></div>
+      </div>
+      <div class="testi-card reveal d2">
+        <div class="stars">★★★★★</div>
+        <p>"From brand identity to a fully automated sales engine — they handled everything. Felt like having an elite in-house team."</p>
+        <div class="testi-author"><div class="t-avatar">DA</div><div><div class="t-name">David Anderson</div><div class="t-co">CEO · Ironcrest Capital, Canada</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band reveal">
+  <h2>Ready to Build Your<br/><span class="grad-text">AI-Powered Business?</span></h2>
+  <p>Join 150+ companies worldwide who've transformed their digital operations with ROK AI Agency. Let's build something extraordinary.</p>
+  <div class="cta-band-btns">
+    <button class="btn btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">⚡ Book Free Consultation</button>
+    <a href="mailto:ronitdas062010@gmail.com" class="btn btn-ghost">✉ Send Email</a>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-head">
+      <span class="label-tag reveal">Get In Touch</span>
+      <h2 class="sh2 reveal d1">Let's build your next<br/>AI-powered project</h2>
+      <p class="sh-sub reveal d2">Book a free 30-minute discovery call. We'll audit your business, identify automation opportunities, and propose a roadmap — zero pressure.</p>
+    </div>
+    <div class="booking-wrap">
+      <div>
+        <div class="contact-links">
+          <a href="mailto:ronitdas062010@gmail.com" class="c-link reveal">
+            <div class="c-ico">✉</div>
+            <div><div class="c-label">EMAIL</div><div class="c-val">ronitdas062010@gmail.com</div></div>
+          </a>
+          <a href="tel:+919934769043" class="c-link reveal d1">
+            <div class="c-ico">📞</div>
+            <div><div class="c-label">PHONE / WHATSAPP</div><div class="c-val">+91 99347 69043</div></div>
+          </a>
+          <a href="https://instagram.com/rok_ai_agency" target="_blank" class="c-link reveal d2">
+            <div class="c-ico">◎</div>
+            <div><div class="c-label">INSTAGRAM</div><div class="c-val">@rok_ai_agency</div></div>
+          </a>
+          <a href="https://wa.me/919934769043" target="_blank" class="c-link reveal d3">
+            <div class="c-ico">💬</div>
+            <div><div class="c-label">WHATSAPP</div><div class="c-val">Chat instantly on WhatsApp</div></div>
+          </a>
+          <div class="c-link reveal d4" style="cursor:default;">
+            <div class="c-ico">🌐</div>
+            <div><div class="c-label">COVERAGE</div><div class="c-val">Worldwide · All Timezones</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="form-panel reveal-r">
+        <form onsubmit="handleSubmit(event)">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+            <div class="form-row">
+              <label>Full Name</label>
+              <input type="text" required placeholder="Jane Doe"/>
+            </div>
+            <div class="form-row">
+              <label>Email Address</label>
+              <input type="email" required placeholder="jane@company.com"/>
+            </div>
+          </div>
+          <div class="form-row">
+            <label>Service Interest</label>
+            <select required>
+              <option value="">Select a service</option>
+              <option>AI Automation & Chatbots</option>
+              <option>Website Development</option>
+              <option>SaaS Development</option>
+              <option>SEO Optimization</option>
+              <option>Google & Meta Ads</option>
+              <option>Branding & Social Media</option>
+              <option>CRM Automation</option>
+              <option>Lead Generation</option>
+              <option>Enterprise AI System</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label>Tell us about your project</label>
+            <textarea required placeholder="Brief about your goals, timeline, and budget..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;" id="submitBtn">Send Inquiry →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo"><div class="logo-mark">R</div><span class="logo-text">ROK<span class="dot">.</span>AI</span></a>
+        <p>Building the future of digital business with AI-powered websites, automation, and growth systems for companies worldwide.</p>
+        <div class="footer-socials">
+          <a href="https://instagram.com/rok_ai_agency" target="_blank" class="f-social" title="Instagram">◎</a>
+          <a href="mailto:ronitdas062010@gmail.com" class="f-social" title="Email">✉</a>
+          <a href="tel:+919934769043" class="f-social" title="Call">📞</a>
+          <a href="https://wa.me/919934769043" target="_blank" class="f-social" title="WhatsApp">💬</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="#services">AI Automation</a>
+        <a href="#services">Web Development</a>
+        <a href="#services">SEO & Ads</a>
+        <a href="#services">SaaS Development</a>
+        <a href="#services">Branding</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#about">About</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms & Conditions</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">Refund Policy</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 ROK AI Agency — <span class="grad-text">Building the Future with AI</span></span>
+      <span>Crafted by Ronit Das · rok.ai.agency</span>
+    </div>
+  </div>
+</footer>
+
+<!-- CHAT FAB -->
+<button class="chat-fab" id="chatFab" aria-label="Chat with us">⚡</button>
+<div class="chat-panel" id="chatPanel">
+  <div class="chat-header">
+    <div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div class="ch-dot"></div>
+        <h4>ROK AI Assistant</h4>
+      </div>
+      <p>Typically replies in minutes</p>
+    </div>
+  </div>
+  <div class="chat-body" id="chatBody">
+    <div class="chat-msg bot">👋 Hi! I'm the ROK AI assistant. What can I help you with today? Ask me about our services, pricing, or book a free consultation.</div>
+  </div>
+  <div class="chat-input-row">
+    <input type="text" id="chatInput" placeholder="Ask anything..." onkeydown="if(event.key==='Enter')sendChat()"/>
+    <button class="chat-send" onclick="sendChat()">→</button>
+  </div>
+</div>
+
+<script>
+// ─── LOADER ───
+const lbar = document.getElementById('lbar');
+const ltxt = document.getElementById('ltxt');
+const messages = ['INITIALIZING SYSTEMS','LOADING AI MODULES','CALIBRATING UI','ONLINE'];
+let pct = 0, mi = 0;
+const loadInterval = setInterval(() => {
+  pct += Math.random() * 18 + 4;
+  if (pct >= 100) { pct = 100; clearInterval(loadInterval); }
+  lbar.style.width = pct + '%';
+  const idx = Math.min(Math.floor(pct / 34), messages.length - 1);
+  if (mi !== idx) { mi = idx; ltxt.textContent = messages[idx]; }
+  if (pct >= 100) {
+    setTimeout(() => {
+      document.getElementById('loader').classList.add('out');
+      setTimeout(() => document.getElementById('loader').remove(), 800);
+    }, 300);
+  }
+}, 80);
+
+// ─── CUSTOM CURSOR ───
+const cdot = document.getElementById('cdot');
+const cring = document.getElementById('cring');
+const mglow = document.getElementById('mglow');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cdot.style.left = mx + 'px'; cdot.style.top = my + 'px';
+  mglow.style.left = (mx - 350) + 'px'; mglow.style.top = (my - 350) + 'px';
+});
+(function raf() { rx+=(mx-rx)*0.14; ry+=(my-ry)*0.14; cring.style.left=rx+'px'; cring.style.top=ry+'px'; requestAnimationFrame(raf); })();
+document.querySelectorAll('a,button,.svc-card,.proj-card,.testi-card,.price-card,.c-link,input,select,textarea').forEach(el => {
+  el.addEventListener('mouseenter', () => cring.classList.add('hov'));
+  el.addEventListener('mouseleave', () => cring.classList.remove('hov'));
+});
+
+// ─── NEURAL CANVAS ───
+(function() {
+  const canvas = document.getElementById('neural-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, nodes = [];
+  function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  resize(); window.addEventListener('resize', resize);
+  for (let i = 0; i < 70; i++) {
+    nodes.push({
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      r: Math.random() * 2 + 1,
+      hue: Math.random() > 0.5 ? 195 : 270
+    });
+  }
+  function draw() {
+    ctx.clearRect(0,0,W,H);
+    // connections
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i+1; j < nodes.length; j++) {
+        const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y;
+        const dist = Math.sqrt(dx*dx+dy*dy);
+        if (dist < 160) {
+          const alpha = (1-dist/160)*0.2;
+          const mid = (nodes[i].hue + nodes[j].hue)/2;
+          ctx.strokeStyle = `hsla(${mid},80%,65%,${alpha})`;
+          ctx.lineWidth = 0.8;
+          ctx.beginPath(); ctx.moveTo(nodes[i].x, nodes[i].y); ctx.lineTo(nodes[j].x, nodes[j].y); ctx.stroke();
+        }
+      }
+    }
+    // nodes
+    nodes.forEach(n => {
+      ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI*2);
+      ctx.fillStyle = `hsla(${n.hue},80%,70%,0.55)`;
+      ctx.fill();
+      ctx.shadowBlur = 8; ctx.shadowColor = `hsl(${n.hue},80%,70%)`;
+      ctx.fill(); ctx.shadowBlur = 0;
+      n.x += n.vx; n.y += n.vy;
+      if (n.x < 0 || n.x > W) n.vx *= -1;
+      if (n.y < 0 || n.y > H) n.vy *= -1;
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ─── NAVBAR SCROLL ───
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// ─── HAMBURGER ───
+const ham = document.getElementById('hamburger');
+const mob = document.getElementById('mobile-menu');
+ham.addEventListener('click', () => {
+  ham.classList.toggle('open');
+  mob.classList.toggle('open');
+});
+document.querySelectorAll('.mob-nav').forEach(a => {
+  a.addEventListener('click', () => { ham.classList.remove('open'); mob.classList.remove('open'); });
+});
+
+// ─── TICKER ───
+const items = ['AI Automation','Web Development','SEO & Growth','AI Chatbots','SaaS Platforms','Google Ads','Meta Ads','Branding','CRM Systems','Lead Generation','E-Commerce','AI Business Solutions'];
+const track = document.getElementById('ticker-track');
+[...items,...items].forEach(t => {
+  const d = document.createElement('div');
+  d.className = 'ticker-item';
+  d.innerHTML = `<span class="t-dot"></span><span>${t}</span>`;
+  track.appendChild(d);
+});
+
+// ─── SERVICES ───
+const svcs = [
+  { i:'🤖', t:'AI Automation', d:'End-to-end workflow automation that runs your business 24/7 without manual input.' },
+  { i:'💬', t:'AI Chatbots', d:'Custom conversational agents trained on your data, brand voice, and business logic.' },
+  { i:'🌐', t:'Website Development', d:'High-performance, conversion-optimized websites built with Next.js and React.' },
+  { i:'⚡', t:'SaaS Development', d:'Full-stack SaaS platforms from concept to production — designed to scale.' },
+  { i:'🔍', t:'SEO Optimization', d:'Technical + content SEO strategies powered by AI that rank and convert.' },
+  { i:'✍', t:'Blog Writing', d:'AI-assisted, human-edited content engineered for search rankings and authority.' },
+  { i:'🎯', t:'Google Ads', d:'Profitable search & display campaigns with full ROAS tracking and optimization.' },
+  { i:'📱', t:'Meta Ads', d:'Facebook & Instagram performance campaigns at scale with AI creative testing.' },
+  { i:'💎', t:'Branding', d:'Premium brand identity systems — logo, colors, type, voice — that command attention.' },
+  { i:'📈', t:'Social Media Growth', d:'Organic growth strategies powered by AI content engines and trend analysis.' },
+  { i:'🛒', t:'E-Commerce Websites', d:'Shopify & custom storefronts engineered for maximum conversion and repeat revenue.' },
+  { i:'⚙', t:'CRM Automation', d:'HubSpot, Salesforce & custom CRM workflows that nurture leads and close deals.' },
+  { i:'🎣', t:'Lead Generation', d:'Automated pipelines that fill your calendar with qualified, high-intent leads.' },
+  { i:'🧠', t:'AI Business Solutions', d:'Bespoke AI infrastructure tailored to your industry, operations, and goals.' },
+];
+const grid = document.getElementById('servicesGrid');
+svcs.forEach((s, i) => {
+  const c = document.createElement('div');
+  c.className = `svc-card reveal${i%3===1?' d1':i%3===2?' d2':''}`;
+  c.innerHTML = `<div class="svc-icon">${s.i}</div><h3>${s.t}</h3><p>${s.d}</p><a class="svc-link" href="#contact">Get Started →</a>`;
+  grid.appendChild(c);
+});
+
+// ─── REVEAL ON SCROLL ───
+const revObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); revObs.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal, .reveal-l, .reveal-r').forEach(el => revObs.observe(el));
+
+// ─── ANIMATED COUNTERS ───
+const cntObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target;
+    const target = +el.dataset.count;
+    const suffix = el.textContent.replace(/[0-9]/g,'');
+    let cur = 0, steps = 72;
+    const tick = () => {
+      cur += target / steps;
+      if (cur >= target) { el.textContent = target + suffix; return; }
+      el.textContent = Math.ceil(cur) + suffix;
+      requestAnimationFrame(tick);
+    };
+    tick(); cntObs.unobserve(el);
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('[data-count]').forEach(el => {
+  const t = el.dataset.count;
+  const s = t == 98 ? '%' : t == 4 ? '×' : '+';
+  el.textContent = '0' + s;
+  cntObs.observe(el);
+});
+
+// ─── FORM ───
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  btn.textContent = 'Sending...'; btn.disabled = true;
+  setTimeout(() => {
+    btn.innerHTML = '✓ Inquiry Sent — We\'ll respond within 24h';
+    e.target.reset();
+    setTimeout(() => { btn.innerHTML = 'Send Inquiry →'; btn.disabled = false; }, 5000);
+  }, 1400);
+}
+
+// ─── CHAT ───
+const chatFab = document.getElementById('chatFab');
+const chatPanel = document.getElementById('chatPanel');
+const chatBody = document.getElementById('chatBody');
+const chatInput = document.getElementById('chatInput');
+chatFab.addEventListener('click', () => chatPanel.classList.toggle('open'));
+const botReplies = {
+  default: "Great question! For detailed info, I'd recommend booking a free consultation. Ronit will personally walk you through the best solution for your business. 🚀",
+  price: "Our plans start from $299/mo for the Starter AI plan, $899/mo for Professional, and custom pricing for Enterprise. What's your budget range?",
+  services: "We offer 14+ services including AI Automation, Web Development, SEO, Google/Meta Ads, SaaS Development, Chatbots, CRM Automation, and more. Which interests you?",
+  contact: "You can reach us at ronitdas062010@gmail.com, call/WhatsApp +91 99347 69043, or book a free discovery call below. We respond within 24 hours! ✉",
+  portfolio: "We've delivered 150+ projects across 35+ countries. Recent highlights include Nexus AI Dashboard, VeloCRM Sales Agent, and a +412% organic growth SEO case study.",
+};
+function sendChat() {
+  const msg = chatInput.value.trim(); if (!msg) return;
+  const u = document.createElement('div'); u.className = 'chat-msg usr'; u.textContent = msg; chatBody.appendChild(u);
+  chatInput.value = '';
+  setTimeout(() => {
+    const b = document.createElement('div'); b.className = 'chat-msg bot';
+    const ml = msg.toLowerCase();
+    b.textContent = ml.includes('price')||ml.includes('cost')||ml.includes('plan') ? botReplies.price
+      : ml.includes('service')||ml.includes('offer')||ml.includes('do you') ? botReplies.services
+      : ml.includes('contact')||ml.includes('email')||ml.includes('phone')||ml.includes('reach') ? botReplies.contact
+      : ml.includes('portfolio')||ml.includes('project')||ml.includes('work') ? botReplies.portfolio
+      : botReplies.default;
+    chatBody.appendChild(b); chatBody.scrollTop = chatBody.scrollHeight;
+  }, 700);
+  chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+// ─── PARALLAX HERO AURA ───
+document.addEventListener('mousemove', e => {
+  const aura = document.querySelector('.hero-aura');
+  if (aura) {
+    const x = (e.clientX / window.innerWidth - 0.5) * 50;
+    const y = (e.clientY / window.innerHeight - 0.5) * 50;
+    aura.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+  }
+});
+</script>
+</body>
+</html>
